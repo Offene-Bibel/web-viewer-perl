@@ -1,22 +1,35 @@
+@font-face
+{
+    font-family: Libertine;
+    src: url('../fonts/LinLibertine_R.woff');
+}
+
+@font-face
+{
+    font-family: Biolinum;
+    src: url('../fonts/LinBiolinum_R.woff');
+}
+
+.scripture1
+{
+    font-family: Libertine;
+    font-size: 150%;
+}
+
+.scripture2
+{
+    font-family: Biolinum;
+    font-size: 150%;
+}
+
+*
+{
+    font-family: Biolinum;
+    /*font-size: 150%;*/
+}
 
 
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+h2
+{
+    font-family: Biolinum;
+}

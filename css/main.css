@@ -10,26 +10,23 @@
     src: url('../fonts/LinBiolinum_R.woff');
 }
 
-.scripture1
-{
-    font-family: Libertine;
-    font-size: 150%;
-}
-
-.scripture2
+.scripture
 {
     font-family: Biolinum;
     font-size: 150%;
+}
+
+.scripture_study
+{
+    font-family: Biolinum;
 }
 
 *
 {
     font-family: Biolinum;
-    /*font-size: 150%;*/
 }
 
-
-h2
+h1,h2,h3,h4,h5,h6
 {
     font-family: Biolinum;
 }

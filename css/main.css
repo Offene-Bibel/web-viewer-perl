@@ -50,14 +50,14 @@ body {
     color: #777777;
 }
 
-.auslassung
+.omission
 {
     font-size: 90%;
     color: #777777;
     text-decoration:line-through;
 }
 
-.einfuegung-start,.einfuegung-ende
+.insertion-start,.insertion-end
 {
     color: #BBBBBB;
 }

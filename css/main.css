@@ -83,8 +83,18 @@ footer {
 height: 80px;
 }
 
+/* Fixes for the options menu. Buttons in dropdowns don't work, since environment is position:absolute'd, so they always wrap. */
+    .dropdown-menu>li>div {
+        padding: 3px 20px;
+        white-space: nowrap;
+    }
 
-.navbar-large-logo {
-    padding-top:10px;
-    padding-bottom:0px;
-}
+    #options-menu {
+        width:322px;
+    }
+
+/* Tuning to allow bigger logo in header menu */
+    #navbar-large-logo {
+        padding-top:10px;
+        padding-bottom:0px;
+    }

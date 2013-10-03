@@ -30,7 +30,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand navbar-large-logo" href="#">
+                    <a id="navbar-large-logo" class="navbar-brand" href="#">
                         <img src="img/header.png" height="30" border=0/>
                     </a>
                 </div>
@@ -69,9 +69,27 @@
                     </div>
                     
                     <div class="navbar-nav navbar-right navbar-form btn-group">
-                        <button type="button" class="btn btn-default active">Leichte Sprache</button>
-                        <button type="button" class="btn btn-default">Lesefassung</button>
-                        <button type="button" class="btn btn-default">Studienfassung</button>
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            Action <span class="caret"></span>
+                        </button>
+                        <!-- <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul> -->
+                        <ul id="options-menu" class="dropdown-menu keep-open" role="menu">
+                            <li>
+                                <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-default active">Leichte Sprache</button>
+                                    <button type="button" class="btn btn-default">Lesefassung</button>
+                                    <button type="button" class="btn btn-default">Studienfassung</button>
+                                </div>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
                     </div>
                 </div><!--/.nav-collapse -->
             </div>

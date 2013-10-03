@@ -82,3 +82,9 @@ padding: 0 0 80px;
 footer {
 height: 80px;
 }
+
+
+.navbar-large-logo {
+    padding-top:10px;
+    padding-bottom:0px;
+}

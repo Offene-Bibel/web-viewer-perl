@@ -10,6 +10,21 @@
     src: url('../fonts/LinBiolinum_R.woff');
 }
 
+*
+{
+    font-family: Biolinum;
+}
+
+h1,h2,h3,h4,h5,h6
+{
+    font-family: Biolinum;
+}
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
 .scripture
 {
     font-family: Biolinum;
@@ -21,12 +36,28 @@
     font-family: Biolinum;
 }
 
-*
+.verse_num
 {
-    font-family: Biolinum;
+    vertical-align: super;
+    font-size: 70%;
+    color: #AAAAAA;
 }
 
-h1,h2,h3,h4,h5,h6
+.alternative
 {
-    font-family: Biolinum;
+    /*display: none;*/ /* Do this to hide alternatives */
+    font-size: 90%;
+    color: #777777;
+}
+
+.auslassung
+{
+    font-size: 90%;
+    color: #777777;
+    text-decoration:line-through;
+}
+
+.einfuegung-start,.einfuegung-ende
+{
+    color: #BBBBBB;
 }

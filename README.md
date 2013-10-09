@@ -1,11 +1,13 @@
 Todos
 =====
 
-- Backend
-- *News* und *Über uns* in Drupal
-- *Mithelfen* in Wiki
-- *Über uns* schreiben
-- Kapitel Auswahl
-- Hilfeknopf, der erklärt was [] {} () ℘ 〈a〉 bedeutet. Evenutell auch kurze Erklärung von *Leichte Sprache*, *Lesefassung*, *Studienfassung*.
-- Fortschrittsanzeiger für jede Fassung + Hoverover mit Erklärung
-- Bei Optionen einbauen, Versnummern und oder Alternativen auszuschalten
+- Die *Über uns* Seite. Entweder direkt in Bootstrap, oder über Drupal. Falls direkt in Bootstrap, dann irgend ein schönes Design ausdenken und umsetzen. Hier kann man ziemlich gut kopieren: [Bootstrapbeispiele](http://getbootstrap.com/getting-started/#examples) Ich denke der Inhalt sollte maximal 1-2 Bildschirmseiten sein. Im Zweifel lieber weniger.
+- Anbindung an Drupal. Notwendig für den Blog. Ein Theme für Drupal das genau so aussieht wäre super. Ein bis maximal zweispaltig würde ich vorschlagen. Entweder nur den Blog, aber keine Vorschau, sondern direkt die kompletten Einträge, oder den Blog in einem großen Block (Breite 8 oder 9 laut Gridsystem) und daneben in klein die Twitterchangelogs (Breite 4 oder 3). Dieser Punkt ist warscheinlich etwas mehr Arbeit.
+- Die *Mithelfen* Seite. Anbindung der Wiki. Ich vermute es gibt eine Art globales Wikitemplate, in dem das Gesamtlayout der aktuellen offenen-bibel.de drin ist. Bei dem Layout oben die Leiste mit dazubauen.
+- Die *Lesen* Seite verbessern. Da gibt's viele Sachen.
+    - Das Layout für die Kapitelauswahl bauen.
+    - Indikatoren für den Status der Fassungen einbauen + Hoverover mit Erklärung.
+    - Das Ein-/Ausblenden der verschiedenen Fassungen programmieren. (Knöpfe dafür sind schon da).
+    - Bei Optionen einbauen, Versnummern und Alternativen auszuschalten.
+    - Hilfeknopf, der erklärt was [] {} () ℘ 〈a〉 bedeutet. Evenutell auch kurze Erklärung von *Leichte Sprache*, *Lesefassung*, *Studienfassung*.
+- Backend **(patzim)**

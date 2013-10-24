@@ -7,7 +7,6 @@ Todos
 - Die *Lesen* Seite verbessern. Da gibt's viele Sachen.
     - Das Layout für die Kapitelauswahl bauen.
     - Indikatoren für den Status der Fassungen einbauen + Hoverover mit Erklärung.
-    - Das Ein-/Ausblenden der verschiedenen Fassungen programmieren. (Knöpfe dafür sind schon da).
     - Bei Optionen einbauen, Versnummern und Alternativen auszuschalten.
     - Hilfeknopf, der erklärt was [] {} () ℘ 〈a〉 bedeutet. Evenutell auch kurze Erklärung von *Leichte Sprache*, *Lesefassung*, *Studienfassung*.
 - Backend **(patzim)**

@@ -75,9 +75,9 @@
                             <ul id="options-menu" class="dropdown-menu keep-open" role="menu">
                                 <li>
                                     <div class="btn-group btn-group-sm">
-                                        <button type="button" class="btn btn-default active">Leichte Sprache</button>
-                                        <button type="button" class="btn btn-default">Lesefassung</button>
-                                        <button type="button" class="btn btn-default">Studienfassung</button>
+                                        <button type="button" class="btn btn-default active" id="jump-to-plain">Leichte Sprache</button>
+                                        <button type="button" class="btn btn-default" id="jump-to-read">Lesefassung</button>
+                                        <button type="button" class="btn btn-default" id="jump-to-study">Studienfassung</button>
                                     </div>
                                 </li>
                                 <li class="divider"></li>
@@ -90,9 +90,9 @@
         </div>
 
         <div class="container">
-            <div class="row">
+            <div class="row" id="content">
                 <div class="col-lg-4">
-                    <h2>Leichte Sprache</h2>
+                    <h2 id="plain">Leichte Sprache</h2>
                     <p class="scripture"><span class="verse_num">1</span>Das ist ein Lied von David:
                         Gott ist immer bei mir.
                         Darum geht es mir gut. 
@@ -133,7 +133,7 @@
                     </p>
                 </div>
                 <div class="col-lg-4">
-                    <h2>Lesefassung</h2>
+                    <h2 id="read">Lesefassung</h2>
                     <p class="scripture"><span class="verse_num">1</span>Ein Davidspsalm.
                         Mein Hirte – das ist ⸂unser Gott⸃. Nie fehlt mir etwas.
                         <span class="verse_num">2</span>Auf saftigen Weiden lässt er mich rasten,
@@ -156,7 +156,7 @@
                     </p>
                 </div>
                 <div class="col-lg-4">
-                    <h2>Studienfassung</h2>
+                    <h2 id="study">Studienfassung</h2>
                     <p class="scripture_study">
                         <span class="verse_num">1</span>Ein Psalm <span class="alternative">(begleitetes Lied)</span> von                                     <span class="alternative">(für)</span> David.
                         JHWH ist mein Hirte.<a href="#" data-toggle="tooltip" data-placement="auto bottom" title="first tooltip">〈a〉</a> Nichts fehlt mir <span class="alternative">(wird mir fehlen)</span>〈b〉.℘℘

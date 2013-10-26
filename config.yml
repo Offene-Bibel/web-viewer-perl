@@ -7,7 +7,7 @@ appname: "OfBiViewer"
 
 # The default layout to use for your application (located in
 # views/layouts/main.tt)
-layout: "main"
+layout: "main.tx"
 
 # when the charset is set to UTF-8 Dancer2 will handle for you
 # all the magic of encoding and decoding. You should not care
@@ -18,7 +18,7 @@ charset: "UTF-8"
 # simple: default and very basic template engine
 # template_toolkit: TT
 
-template: "simple"
+template: Xslate
 
 # template: "template_toolkit"
 # engines:

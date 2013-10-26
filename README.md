@@ -13,9 +13,9 @@ Todos
 
 Backend
 -------
-The backend is driven by pre generated html fragments created using the converter. It expects folder containing one file for each chapter and version. An index of all such files has to be given in a status file. There can be more than one status file.
+The backend is driven by pre generated html fragments created using the converter. It expects folder containing one file for each chapter and version. An index of all such files has to be given in an index file. There can be more than one index file.
 
-### status file
+### index file
 Each line corresponds to a chapter in a translation. Format is: `book chapter translation status filename`. Lines started with `#` are treated as comments.
 
     ...

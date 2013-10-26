@@ -10,3 +10,29 @@ Todos
     - Bei Optionen einbauen, Versnummern und Alternativen auszuschalten.
     - Hilfeknopf, der erklärt was [] {} () ℘ 〈a〉 bedeutet. Evenutell auch kurze Erklärung von *Leichte Sprache*, *Lesefassung*, *Studienfassung*.
 - Backend **(patzim)**
+
+Backend
+-------
+The backend is driven by pre generated html fragments created using the converter. It expects folder containing one file for each chapter and version. An index of all such files has to be given in a status file. There can be more than one status file.
+
+### status file
+Each line corresponds to a chapter in a translation. Format is: `book chapter translation status filename`. Lines started with `#` are treated as comments.
+    ...
+    Matthäus 12 sf 3 Matthäus_12_sf
+    Matthäus 12 lf 0 Matthäus_12_lf
+    Matthäus 12 ls 4 Matthäus_12_ls
+	# A comment.
+    Matthäus 13 sf 1 Matthäus_12_sf
+    ...
+
+Status can be one of the following:
+- 0 = existiert nicht
+- 1 = teilweise übersetzt
+- 2 = Rohübersetzung
+- 3 = fast fertig
+- 4 = fertig
+
+### URL format
+/lesen/Matthäus_3
+/lesen/Könige1_3?verse=3
+

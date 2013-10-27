@@ -48,19 +48,19 @@
 		<div class="col-lg-4">
 			<h2 id="plain">Leichte Sprache</h2>
 			<p class="scripture">
-			<: $plain :>
+			<: $plain |raw :>
 			</p>
 		</div>
 		<div class="col-lg-4">
 			<h2 id="read">Lesefassung</h2>
 			<p class="scripture">
-			<: $read :>
+			<: $read |raw :>
 			</p>
 		</div>
 		<div class="col-lg-4">
 			<h2 id="study">Studienfassung</h2>
 			<p class="scripture_study">
-			<: $study :>
+			<: $study |raw :>
 			</p>
 		</div>
 	</div>

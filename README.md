@@ -36,5 +36,5 @@ Status can be one of the following:
 
 ### URL format
 `/lesen/Matthäus_3`
-`/lesen/Könige1_3?verse=3`
+`/lesen/1_Könige_3?verse=3`
 

@@ -9,4 +9,9 @@ Todos
     - Indikatoren für den Status der Fassungen einbauen + Hoverover mit Erklärung.
     - Bei Optionen einbauen, Versnummern und Alternativen auszuschalten.
     - Hilfeknopf, der erklärt was [] {} () ℘ 〈a〉 bedeutet. Evenutell auch kurze Erklärung von *Leichte Sprache*, *Lesefassung*, *Studienfassung*.
-- Backend **(patzim)**
+- main.css in verschiedene .css aufsplitten, um Mobile First umzusetzen
+- JavaScript von click-Events lösen, da dieses Einsatz der Maus voraussetzen (schließt Tastatur und alternative Eingabegeräte aus!)
+    - Dies steigert die Performance (es werden nur relevante Dateien) geladen
+    - Daneben wird das Projekt wartungsärmer (?)
+- Manifest-Datei schreiben, damit das Projekt als Webapp bedienbar ist
+

@@ -54,6 +54,19 @@
                         <span class="icon-bar"></span>
                     </button>
                     <span class="navbar-brand">Psalm 23</span>
+		    <div class="btn-group pull-left">
+			    <button type="button" class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown">
+				    <span class="glyphicon glyphicon-book"><span class="caret"></span></span>
+			    </button>
+			    <ul class="dropdown-menu keep-open" role="menu">
+				    <li><a href="#">Matthäus</a></li>
+				    <li><a href="#">Markus</a></li>
+				    <li><a href="#">Lukas</a></li>
+				    <li><a href="#">Johannes</a></li>
+				    <li class="divider"></li>
+				    <li><a href="#">Separated link</a></li>
+			    </ul>
+		    </div>
                 </div>
                 <div class="navbar-collapse collapse">
                     <!-- The following two diffs are an extremly ugly hack to work around bug: https://github.com/twbs/bootstrap/issues/9950 -->
@@ -101,7 +114,7 @@
         <div class="container">
             <div class="row" id="content">
                 <div class="col-lg-4">
-                    <h2 id="plain">Leichte Sprache</h2>
+			<h2 id="plain">Leichte Sprache<span class="progress"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span></h2>
                     <p class="scripture"><span class="verse_num">1</span>Das ist ein Lied von David:
                         Gott ist immer bei mir.
                         Darum geht es mir gut. 
@@ -142,7 +155,7 @@
                     </p>
                 </div>
                 <div class="col-lg-4">
-                    <h2 id="read">Lesefassung</h2>
+			<h2 id="read">Lesefassung<span class="progress">&#9733;&#9734;</span></h2>
                     <p class="scripture"><span class="verse_num">1</span>Ein Davidspsalm.
                         Mein Hirte – das ist ⸂unser Gott⸃. Nie fehlt mir etwas.
                         <span class="verse_num">2</span>Auf saftigen Weiden lässt er mich rasten,
@@ -165,7 +178,7 @@
                     </p>
                 </div>
                 <div class="col-lg-4">
-                    <h2 id="study">Studienfassung</h2>
+			<h2 id="study">Studienfassung<span class="progress">&Star;&star;</span></h2>
                     <p class="scripture_study">
                         <span class="verse_num">1</span>Ein Psalm <span class="alternative">(begleitetes Lied)</span> von                                     <span class="alternative">(für)</span> David.
                         JHWH ist mein Hirte.<a href="#" data-toggle="tooltip" data-placement="auto bottom" title="first tooltip">〈a〉</a> Nichts fehlt mir <span class="alternative">(wird mir fehlen)</span>〈b〉.℘℘

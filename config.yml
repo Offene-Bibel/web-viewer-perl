@@ -20,6 +20,10 @@ charset: "UTF-8"
 
 template: Xslate
 
+plugins:
+  Ajax:
+    content_type: 'application/json'
+
 # OfBi stuff
 indexes:
   - "/home/patrick/Documents/offeneBibel/eclipse_offbi/workspace/Parser/install/webResults/generated.index"

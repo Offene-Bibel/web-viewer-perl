@@ -4,13 +4,17 @@ use strict;
 use utf8;
 
 use Dancer2;
+use Dancer2::Plugin::Ajax;
 use String::Util 'hascontent';
 use File::Spec;
 
 our $VERSION = '0.1';
 
+set serializer => 'JSON';
+
 =pod
 %index{Matthäus_5}{lf}{filename};
+%index{Matthäus|...}{1-X}{ls|lf|sf}{book|chapter|version|status|filename}
 =cut
 my %index = ();
 {
@@ -29,13 +33,12 @@ my %index = ();
                     status => $4,
                     filename => File::Spec->catpath($volume, $directories, $5),
                 );
-                my $key = $entry{book} . '_' . $entry{chapter};
                 if (not (-f -r -s $entry{filename})) {
                     say "Skipping $entry{filename}, check permissions and stuff.";
                     next;
                 }
                 #$index{$key} = \{} if not defined $index{$key};
-                $index{$key}{$entry{version}} = \%entry;
+                $index{$entry{book}}{$entry{chapter}}{$entry{version}} = \%entry;
             }
             else {
                 die "Line $. in file $indexFilename is not valid. Aborting.";
@@ -50,15 +53,20 @@ get '/' => sub {
     template 'index';
 };
 
-get '/lesen/:chapter' => sub {
+ajax '/lesen/index/buecher' => sub {
+    my @books = keys %index;
+    \@books;
+};
+
+get '/lesen/:book/:chapter' => sub {
+    my $bookName = params->{book};
     my $chapterNum = params->{chapter};
     my %chapterEntry; {
-        if(not exists $index{$chapterNum}) {
-            my ($key, $value) = each %index;
-            %chapterEntry = %$value;
+        if(not exists $index{$bookName}{$chapterNum}) {
+            %chapterEntry = %{$index{Psalm}{23}};
         }
         else {
-            %chapterEntry = %{$index{$chapterNum}};
+            %chapterEntry = %{$index{$bookName}{$chapterNum}};
         }
     }
 	my $sfText = '';
@@ -88,6 +96,7 @@ LINKS
         study => $sfText,
     };
 };
+
 
 true;
 

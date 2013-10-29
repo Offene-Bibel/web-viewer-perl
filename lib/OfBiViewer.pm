@@ -84,7 +84,7 @@ get '/lesen/:book/:chapter' => sub {
 		}
 	}
     template "lesen.tx", {
-        page_title => $chapterNum,
+        page_title => "Offene Bibel: $bookName $chapterNum",
         toplevel_links => <<LINKS,
 <li class="active"><a href="#">Lesen</a></li>
 <li><a href="#about">News</a></li>

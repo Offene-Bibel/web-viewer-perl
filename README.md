@@ -7,7 +7,7 @@ Installation
 Requirements are:
 
 - Perl version 5.12.4 or higher.
-- Following CPAN modules: Dancer2, Dancer2::Plugins::Ajax, String::Util. You can install all these modules using `perl -MCPAN -e 'install Dancer2 Dancer2::Plugins::Ajax String::Util'`
+- Following CPAN modules: Dancer2, Dancer2::Plugins::Ajax, String::Util, Moo. You can install all these modules using `perl -MCPAN -e 'install Dancer2 Dancer2::Plugins::Ajax String::Util Moo'`
 - A set of generated chapter files and a respective index. This can be downloaded here: <https://www.dropbox.com/s/r8frpmkipx5ey0v/webResults.zip>. Alternatively you can generate them yourself using the [converter](https://gitorious.org/offene-bibel-converter/offene-bibel-converter).
 - The viewer itself. You can either download it [here](https://gitorious.org/offene-bibel-converter/web-viewer) (Download button is at the top right) or clone it using git: `git clone git@gitorious.org:offene-bibel-converter/web-viewer.git`.
 

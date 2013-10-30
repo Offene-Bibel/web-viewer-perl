@@ -1,0 +1,147 @@
+- name: Genesis
+  chapterCount: 50
+- name: Exodus
+  chapterCount: 40
+- name: Levitikus
+  chapterCount: 27
+- name: Numeri
+  chapterCount: 36
+- name: Deuteronomium
+  chapterCount: 34
+- name: Josua
+  chapterCount: 24
+- name: Richter
+  chapterCount: 21
+- name: Rut
+  chapterCount: 4
+- name: 1 Samuel
+  chapterCount: 31
+- name: 2 Samuel
+  chapterCount: 24
+- name: 1 Könige
+  chapterCount: 22
+- name: 2 Könige
+  chapterCount: 25
+- name: 1 Chronik
+  chapterCount: 29
+- name: 2 Chronik
+  chapterCount: 36
+- name: Esra
+  chapterCount: 10
+- name: Nehemia
+  chapterCount: 13
+- name: Ester
+  chapterCount: 10
+- name: Ijob
+  chapterCount: 42
+- name: Psalm
+  chapterCount: 150
+- name: Sprichwörter
+  chapterCount: 31
+- name: Kohelet
+  chapterCount: 12
+- name: Hohelied
+  chapterCount: 8
+- name: Jesaja
+  chapterCount: 66
+- name: Jeremia
+  chapterCount: 52
+- name: Klagelieder
+  chapterCount: 5
+- name: Ezechiel
+  chapterCount: 48
+- name: Daniel
+  chapterCount: 14
+- name: Hosea
+  chapterCount: 14
+- name: Joel
+  chapterCount: 4
+- name: Amos
+  chapterCount: 9
+- name: Obadja
+  chapterCount: 1
+- name: Jona
+  chapterCount: 4
+- name: Micha
+  chapterCount: 7
+- name: Nahum
+  chapterCount: 3
+- name: Habakuk
+  chapterCount: 3
+- name: Zefanja
+  chapterCount: 3
+- name: Haggai
+  chapterCount: 2
+- name: Sacharja
+  chapterCount: 14
+- name: Maleachi
+  chapterCount: 3
+- name: Matthäus
+  chapterCount: 28
+- name: Markus
+  chapterCount: 16
+- name: Lukas
+  chapterCount: 24
+- name: Johannes
+  chapterCount: 21
+- name: Apostelgeschichte
+  chapterCount: 28
+- name: Römer
+  chapterCount: 16
+- name: 1 Korinther
+  chapterCount: 16
+- name: 2 Korinther
+  chapterCount: 13
+- name: Galater
+  chapterCount: 6
+- name: Epheser
+  chapterCount: 6
+- name: Philipper
+  chapterCount: 4
+- name: Kolosser
+  chapterCount: 4
+- name: 1 Thessalonicher
+  chapterCount: 5
+- name: 2 Thessalonicher
+  chapterCount: 3
+- name: 1 Timotheus
+  chapterCount: 6
+- name: 2 Timotheus
+  chapterCount: 4
+- name: Titus
+  chapterCount: 3
+- name: Philemon
+  chapterCount: 1
+- name: Hebräer
+  chapterCount: 13
+- name: Jakobus
+  chapterCount: 5
+- name: 1 Petrus
+  chapterCount: 5
+- name: 2 Petrus
+  chapterCount: 3
+- name: 1 Johannes
+  chapterCount: 5
+- name: 2 Johannes
+  chapterCount: 1
+- name: 3 Johannes
+  chapterCount: 1
+- name: Judas
+  chapterCount: 1
+- name: Offenbarung
+  chapterCount: 22
+- name: Baruch
+  chapterCount: 6
+- name: Judit
+  chapterCount: 16
+- name: 1 Makkabäer
+  chapterCount: 16
+- name: 2 Makkabäer
+  chapterCount: 15
+- name: Jesus Sirach
+  chapterCount: 51
+- name: Tobit
+  chapterCount: 14
+- name: Weisheit
+  chapterCount: 19
+

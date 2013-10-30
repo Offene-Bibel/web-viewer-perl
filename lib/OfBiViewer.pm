@@ -5,20 +5,40 @@ use utf8;
 
 use Dancer2;
 use Dancer2::Plugin::Ajax;
-use String::Util 'hascontent';
-use File::Spec;
+use Data::Dumper;
 
 our $VERSION = '0.1';
 
 set serializer => 'JSON';
 
-=pod
-%index{Matthäus_5}{lf}{filename};
-%index{Matthäus|...}{1-X}{ls|lf|sf}{book|chapter|version|status|filename}
-=cut
-my %index = ();
 {
-    use Data::Dumper;
+package BookList;
+use Moo;
+use Dancer2;
+use File::Spec;
+use YAML::Any 'LoadFile';
+use String::Util 'hascontent';
+use Data::Dumper;
+
+=pod
+%index{1_Könige|...}{chapters}{1-X}{ls|lf|sf}{book|chapter|version|status|filename}
+=cut
+has index => (
+    is => 'ro',
+);
+
+sub BUILD {
+    my $self = shift;
+    my $args = shift;
+
+    $self->constructIndex($args->{bookIndexFile});
+}
+
+sub constructIndex {
+    my $self = shift;
+    my $fileName = shift;
+    $self->{index} = LoadFile($fileName);
+
     my @indexFilenames = @{config->{indexes}};
     for my $indexFilename (@indexFilenames) {
         my ($volume, $directories, $file) = File::Spec->splitpath( $indexFilename );
@@ -26,19 +46,31 @@ my %index = ();
         while (my $line = <$indexFile>) {
             next if $line =~ /^#/ or not hascontent $line;
             if ($line =~ /^(\w+) (\d+) (sf|lf|ls) (\d) (\w+)$/) {
-                my %entry = (
-                    book => $1,
-                    chapter => $2,
-                    version => $3,
-                    status => $4,
-                    filename => File::Spec->catpath($volume, $directories, $5),
-                );
-                if (not (-f -r -s $entry{filename})) {
-                    say "Skipping $entry{filename}, check permissions and stuff.";
+                my $book = $1;
+                my $chapter = $2;
+                my $version = $3;
+                my $status = $4;
+                my $filename = File::Spec->catpath($volume, $directories, $5);
+
+                my $bookEntry = $self->getBook($book);
+                if(not defined $bookEntry) {
+                    say "Skipping $book, no valid book name.";
                     next;
                 }
-                #$index{$key} = \{} if not defined $index{$key};
-                $index{$entry{book}}{$entry{chapter}}{$entry{version}} = \%entry;
+                if (defined $bookEntry->{$chapter}{$version}) {
+                    say "Skipping $version $book $chapter, found more than once.";
+                    next;
+                }
+                if (not (-f -r -s $filename)) {
+                    say "Skipping $filename, check permissions and stuff.";
+                    next;
+                }
+
+                $bookEntry->{chapters}{$chapter}{$version}{book} = $book;
+                $bookEntry->{chapters}{$chapter}{$version}{chapter} = $chapter;
+                $bookEntry->{chapters}{$chapter}{$version}{version} = $version;
+                $bookEntry->{chapters}{$chapter}{$version}{status} = $status;
+                $bookEntry->{chapters}{$chapter}{$version}{filename} = $filename;
             }
             else {
                 die "Line $. in file $indexFilename is not valid. Aborting.";
@@ -46,27 +78,69 @@ my %index = ();
         }
         close $indexFile;
     }
-    die "No usable content given. Aborting." if not %index;
 }
+
+sub getBook {
+    my $self = shift;
+    my $bookName = shift;
+    foreach my $book (@{$self->{index}}) {
+        if($bookName eq $book->{name}) {
+            return $book;
+        }
+    }
+    return undef;
+}
+
+sub books {
+    my $self = shift;
+    return map { $_->{name} } $self->{index};
+}
+}
+
+my $bookList = BookList->new(bookIndexFile => 'resources/bibleBooks.yml');
 
 get '/' => sub {
     template 'index';
 };
 
 ajax '/lesen/index/buecher' => sub {
-    my @books = keys %index;
-    \@books;
+    $bookList->books;
+};
+
+ajax '/lesen/index/buecher/:book' => sub {
+    my $book = $bookList->getBook(params->{book});
+    my %bookIndex = ();
+    return \%bookIndex if not defined $book;
+    
+    $bookIndex{name} = $book->{name};
+    $bookIndex{chapterCount} = $book->{chapterCount};
+
+    my %chapterIndex = {};
+    for(my $chapter = 1; $chapter <= $book->{chapterCount}; $chapter++) {
+        my %chapterEntry = {};
+        $chapterEntry{number} = $chapter;
+        $chapterEntry{sfStatus} =
+            defined $book->{chapters}{$chapter}{sf} ? $book->{chapters}{$chapter}{sf}{status} : '-';
+        $chapterEntry{lfStatus} =
+            defined $book->{chapters}{$chapter}{lf} ? $book->{chapters}{$chapter}{lf}{status} : '-';
+        $chapterEntry{lsStatus} =
+            defined $book->{chapters}{$chapter}{ls} ? $book->{chapters}{$chapter}{ls}{status} : '-';
+        $chapterIndex{$chapter} = \%chapterEntry;
+    }
+    $bookIndex{chapters} = \%chapterIndex;
+    return \%bookIndex;
 };
 
 get '/lesen/:book/:chapter' => sub {
     my $bookName = params->{book};
+    my $bookIndex = $bookList->getBook($bookName);
     my $chapterNum = params->{chapter};
     my %chapterEntry; {
-        if(not exists $index{$bookName}{$chapterNum}) {
-            %chapterEntry = %{$index{Psalm}{23}};
+        if(not exists $bookIndex->{$chapterNum}) {
+            %chapterEntry = %{($bookList->getBook('Psalm'))->{chapters}{23}};
         }
         else {
-            %chapterEntry = %{$index{$bookName}{$chapterNum}};
+            %chapterEntry = %{$bookIndex->{chapters}{$chapterNum}};
         }
     }
 	my $sfText = '';
@@ -96,7 +170,6 @@ LINKS
         study => $sfText,
     };
 };
-
 
 true;
 

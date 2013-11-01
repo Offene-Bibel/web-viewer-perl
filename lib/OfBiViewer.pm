@@ -93,7 +93,7 @@ sub getBook {
 
 sub books {
     my $self = shift;
-    return map { $_->{name} } $self->{index};
+    [map { $_->{name} } @{$self->{index}}];
 }
 }
 

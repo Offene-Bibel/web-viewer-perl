@@ -20,3 +20,12 @@ show_errors: 1
 # print the banner
 startup_info: 1
 
+# OfBi stuff
+# URL prefix of static files like images, css or js files. The app itself serves
+# the static files. Defaults to empty.
+static_prefix: '/fcgi-bin/dispatch.fcgi'
+
+# List of index files listing chapter files. At least one is required.
+indexes:
+  - "~/webResults/generated.index"
+

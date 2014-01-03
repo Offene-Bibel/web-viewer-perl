@@ -1,5 +1,5 @@
 package OfBiViewer;
-use 5.012_004;
+use v5.18;
 use strict;
 use utf8;
 
@@ -18,7 +18,6 @@ set serializer => 'JSON';
 =cut
 my %index = ();
 {
-    use Data::Dumper;
     my @indexFilenames = @{config->{indexes}};
     for my $indexFilename (@indexFilenames) {
         my ($volume, $directories, $file) = File::Spec->splitpath( $indexFilename );
@@ -48,6 +47,11 @@ my %index = ();
     }
     die "No usable content given. Aborting." if not %index;
 }
+
+hook before_template_render => sub {
+    my $tokens = shift;
+    $tokens->{static_prefix} = config->{static_prefix} || '';
+};
 
 get '/' => sub {
     template 'index';

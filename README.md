@@ -13,7 +13,7 @@ Requirements are:
 
 Before the first start, you have to extract or generate the chapter files. In the *config.yml* file adapt the `indexes:` path. You need to change the path to point at the index file in the chapters folder.
 
-Starting the program is done with: `./bin/app.pl`. If all goes well you can point your browser at <http://localhost:3000/lesen/Psalm/23> and should see something.
+To start the program run: `./bin/app.pl`. If all goes well you can point your browser at <http://localhost:3000/lesen/Psalm/23> and should see something.
 
 
 Todos

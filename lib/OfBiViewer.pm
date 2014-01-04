@@ -1,5 +1,5 @@
 package OfBiViewer;
-use v5.18;
+use v5.12;
 use strict;
 use utf8;
 

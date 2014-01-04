@@ -78,11 +78,6 @@ sub constructIndex {
     }
 }
 
-hook before_template_render => sub {
-    my $tokens = shift;
-    $tokens->{static_prefix} = config->{static_prefix} || '';
-};
-
 sub getBook {
     my $self = shift;
     my $bookName = shift;
@@ -101,6 +96,11 @@ sub books {
 }
 
 my $bookList = BookList->new(bookIndexFile => config->{appdir}.'resources/bibleBooks.yml');
+
+hook before_template_render => sub {
+    my $tokens = shift;
+    $tokens->{static_prefix} = config->{static_prefix} || request->uri_base();
+};
 
 get '/' => sub {
     template 'index';

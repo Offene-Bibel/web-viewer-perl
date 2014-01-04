@@ -10,11 +10,11 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
-        <link rel="stylesheet" href="/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/css/bootstrap-theme.css">
-        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="<: $static_prefix :>/css/bootstrap.min.css">
+        <link rel="stylesheet" href="<: $static_prefix :>/css/bootstrap-theme.css">
+        <link rel="stylesheet" href="<: $static_prefix :>/css/main.css">
 
-        <script src="/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script src="<: $static_prefix :>/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -31,7 +31,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a id="navbar-large-logo" class="navbar-brand" href="#">
-                        <img src="/img/header.png" height="30" border=0/>
+                        <img src="<: $static_prefix :>/img/header.png" height="30" border=0/>
                     </a>
                 </div>
                 <div class="navbar-collapse collapse main-navbar-collapse">
@@ -52,8 +52,8 @@
             </small>
         </footer>
     </div> <!-- /container -->
-        <script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
-        <script src="/js/vendor/bootstrap.min.js"></script>
-        <script src="/js/main.js"></script>
+        <script>window.jQuery || document.write('<script src="<: $static_prefix :>/js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+        <script src="<: $static_prefix :>/js/vendor/bootstrap.min.js"></script>
+        <script src="<: $static_prefix :>/js/main.js"></script>
     </body>
 </html>

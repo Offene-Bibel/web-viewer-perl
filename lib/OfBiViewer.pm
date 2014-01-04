@@ -1,5 +1,5 @@
 package OfBiViewer;
-use 5.012_004;
+use v5.18;
 use strict;
 use utf8;
 
@@ -18,7 +18,6 @@ use Dancer2;
 use File::Spec;
 use YAML::Any 'LoadFile';
 use String::Util 'hascontent';
-use Data::Dumper;
 
 =pod
 %index{1_Könige|...}{chapters}{1-X}{ls|lf|sf}{book|chapter|version|status|filename}
@@ -79,6 +78,11 @@ sub constructIndex {
         close $indexFile;
     }
 }
+
+hook before_template_render => sub {
+    my $tokens = shift;
+    $tokens->{static_prefix} = config->{static_prefix} || '';
+};
 
 sub getBook {
     my $self = shift;

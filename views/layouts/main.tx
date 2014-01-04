@@ -38,10 +38,11 @@
                     <ul class="nav navbar-nav">
 						<: $toplevel_links | raw :>
                     </ul>
-                </div><!--/.nav-collapse -->
-            </div>
-        </div>
+                </div><!-- navbar-collapse -->
+            </div><!-- container -->
+        </div><!-- navbar -->
 <: $content | raw :>
+    </div><!-- wrap -->
     <div class="container">
         <footer>
             <hr/>

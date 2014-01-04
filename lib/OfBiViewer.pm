@@ -52,15 +52,15 @@ sub constructIndex {
 
                 my $bookEntry = $self->getBook($book);
                 if(not defined $bookEntry) {
-                    say "Skipping $book, no valid book name.";
+                    debug "Skipping $book, no valid book name.";
                     next;
                 }
                 if (defined $bookEntry->{$chapter}{$version}) {
-                    say "Skipping $version $book $chapter, found more than once.";
+                    debug "Skipping $version $book $chapter, found more than once.";
                     next;
                 }
                 if (not (-f -r -s $filename)) {
-                    say "Skipping $filename, check permissions and stuff.";
+                    debug "Skipping $filename, check permissions and stuff.";
                     next;
                 }
 

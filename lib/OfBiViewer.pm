@@ -34,8 +34,7 @@ sub BUILD {
 }
 
 sub constructIndex {
-    my $self = shift;
-    my $fileName = shift;
+    my ($self, $fileName) = @_;
     $self->{index} = LoadFile($fileName);
 
     my @indexFilenames = @{config->{indexes}};
@@ -101,7 +100,7 @@ sub books {
 }
 }
 
-my $bookList = BookList->new(bookIndexFile => 'resources/bibleBooks.yml');
+my $bookList = BookList->new(bookIndexFile => config->{appdir}.'resources/bibleBooks.yml');
 
 get '/' => sub {
     template 'index';

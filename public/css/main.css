@@ -95,3 +95,13 @@ height: 80px;
         padding-top:10px;
         padding-bottom:0px;
     }
+
+/* Bigger text in navbars */
+    .navbar-nav > li > a {
+        font-size: 150%;
+    }
+
+    .navbar-brand {
+        font-size: 200%;
+    }
+

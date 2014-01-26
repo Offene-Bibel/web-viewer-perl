@@ -13,7 +13,15 @@ Requirements are:
 
 Before the first start, you have to extract or generate the chapter files. In the *config.yml* file adapt the `indexes:` path. You need to change the path to point at the index file in the chapters folder.
 
-To start the program run: `./bin/app.pl`. If all goes well you can point your browser at <http://localhost:3000/lesen/Psalm/23> and should see something.
+Starting
+--------
+You can start the program in several ways:
+
+- `./bin/app.pl` (port 3000)
+- `plackup -L Shotgun ./app.pl` (port 5000)
+- use bin/dispatch.(f)cgi You have to insert the correct path to the app.pl in those scripts. You need to make the stuff in /public available via your webserver.
+
+If all goes well you can point your browser at <http://localhost/lesen/Psalm/23> and should see something.
 
 
 Todos

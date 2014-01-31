@@ -1,68 +1,68 @@
 <div class="container">
-	<div class="navbar navbar-default">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".lesen-navbar-collapse">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<span class="navbar-brand">Psalm 23</span>
-		</div>
-		<div class="navbar-collapse collapse lesen-navbar-collapse">
-			<!-- The following two diffs are an extremly ugly hack to work around bug: https://github.com/twbs/bootstrap/issues/9950 -->
-			<div class="navbar-right" style="width:400px;">
-				<div class="pull-left" style="width:348px;">
-					<form class="navbar-form pull-right" role="search">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Search"/>
-							<span class="input-group-btn">
-								<button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
-							</span>
-						</div>
-					</form>
-				</div>
-				<div class="btn-group">
-					<button type="button" class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown">
-						<i class="glyphicon glyphicon-cog"></i> <span class="caret"></span>
-					</button>
-					<ul id="options-menu" class="dropdown-menu keep-open" role="menu">
-						<li>
-						<div class="btn-group btn-group-sm">
-							<button type="button" class="btn btn-default active" id="jump-to-plain">Leichte Sprache</button>
-							<button type="button" class="btn btn-default" id="jump-to-read">Lesefassung</button>
-							<button type="button" class="btn btn-default" id="jump-to-study">Studienfassung</button>
-						</div>
-						</li>
-						<li class="divider"></li>
-						<li><a href="#">Separated link</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+    <div class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".lesen-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <span class="navbar-brand">Psalm 23</span>
+            </div> <!-- nvbar-header -->
+            <div class="navbar-collapse collapse lesen-navbar-collapse">
+                <!-- The following two diffs are an extremly ugly hack to work around bug: https://github.com/twbs/bootstrap/issues/9950 -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="navbar-form" role="search">
+                        <div id="fix2" class="input-group">
+                            <input type="text" class="form-control"/>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">Go!</button>
+                            </span>
+                        </div><!-- /input-group -->
+                    </li> <!-- li -->
+                    <li class="btn-group navbar-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <i class="glyphicon glyphicon-cog"></i> <span class="caret"></span>
+                        </button>
+                        <ul id="options-menu" class="dropdown-menu keep-open" role="menu">
+                            <li>
+                                <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-default active" id="jump-to-plain">Leichte Sprache</button>
+                                    <button type="button" class="btn btn-default" id="jump-to-read">Lesefassung</button>
+                                    <button type="button" class="btn btn-default" id="jump-to-study">Studienfassung</button>
+                                </div>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </li> <!-- li btn-group -->
+                </ul> <!-- ul navbar-right -->
+            </div> <!-- navbar-collapse -->
+        </div> <!-- container-fluid -->
+    </div> <!-- navbar -->
+</div> <!-- container -->
 
 <div class="container">
-	<div class="row" id="content">
-		<div class="col-lg-4">
-			<h2 id="plain">Leichte Sprache</h2>
-			<p class="scripture">
-			<: $plain |raw :>
-			</p>
-		</div>
-		<div class="col-lg-4">
-			<h2 id="read">Lesefassung</h2>
-			<p class="scripture">
-			<: $read |raw :>
-			</p>
-		</div>
-		<div class="col-lg-4">
-			<h2 id="study">Studienfassung</h2>
-			<p class="scripture_study">
-			<: $study |raw :>
-			</p>
-		</div>
-	</div>
+    <div class="row" id="content">
+        <div class="col-lg-4">
+            <h2 id="plain">Leichte Sprache</h2>
+            <p class="scripture">
+            <: $plain |raw :>
+            </p>
+        </div>
+        <div class="col-lg-4">
+            <h2 id="read">Lesefassung</h2>
+            <p class="scripture">
+            <: $read |raw :>
+            </p>
+        </div>
+        <div class="col-lg-4">
+            <h2 id="study">Studienfassung</h2>
+            <p class="scripture_study">
+            <: $study |raw :>
+            </p>
+        </div>
+    </div>
 </div>
 

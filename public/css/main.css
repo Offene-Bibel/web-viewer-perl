@@ -105,3 +105,8 @@ height: 80px;
         font-size: 200%;
     }
 
+/* Set input group width as per https://github.com/twbs/bootstrap/issues/9950 */
+    #fix2 {
+        width: 250px;
+    }
+

@@ -106,7 +106,7 @@ height: 80px;
     }
 
 /* Set input group width as per https://github.com/twbs/bootstrap/issues/9950 */
-    #fix2 {
+    #search-input-group {
         width: 250px;
     }
 

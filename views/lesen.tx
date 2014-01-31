@@ -14,7 +14,7 @@
                 <!-- The following two diffs are an extremly ugly hack to work around bug: https://github.com/twbs/bootstrap/issues/9950 -->
                 <ul class="nav navbar-nav navbar-right">
                     <li class="navbar-form" role="search">
-                        <div id="fix2" class="input-group">
+                        <div id="search-input-group" class="input-group">
                             <input type="text" class="form-control"/>
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">Go!</button>

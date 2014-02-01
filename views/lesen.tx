@@ -17,7 +17,7 @@
                         <div id="search-input-group" class="input-group">
                             <input type="text" class="form-control"/>
                             <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">Go!</button>
+                                <button class="btn btn-primary" type="button">Go!</button>
                             </span>
                         </div><!-- /input-group -->
                     </li> <!-- li -->
@@ -25,12 +25,12 @@
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                             <i class="glyphicon glyphicon-cog"></i> <span class="caret"></span>
                         </button>
-                        <ul id="options-menu" class="dropdown-menu keep-open" role="menu">
+                        <ul class="dropdown-menu keep-open" role="menu">
                             <li>
-                                <div class="btn-group btn-group-sm">
-                                    <button type="button" class="btn btn-default active" id="jump-to-plain">Leichte Sprache</button>
-                                    <button type="button" class="btn btn-default" id="jump-to-read">Lesefassung</button>
-                                    <button type="button" class="btn btn-default" id="jump-to-study">Studienfassung</button>
+                                <div id="options-menu" class="btn-group btn-group-sm">
+                                    <button id="toggle-plain" class="btn btn-primary">Leichte Sprache</button>
+                                    <button id="toggle-read" class="btn btn-primary">Lesefassung</button>
+                                    <button id="toggle-study" class="btn btn-primary">Studienfassung</button>
                                 </div>
                             </li>
                             <li class="divider"></li>

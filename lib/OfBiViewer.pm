@@ -6,6 +6,7 @@ use utf8;
 use Dancer2;
 use Dancer2::Plugin::Ajax;
 use Data::Dumper;
+use DBI;
 
 our $VERSION = '0.1';
 
@@ -20,7 +21,120 @@ use YAML::Any 'LoadFile';
 use String::Util 'hascontent';
 
 =pod
-%index{1_Könige|...}{chapters}{1-X}{ls|lf|sf}{book|chapter|version|status|filename}
+"index": {
+    "1_Könige": {
+        "1": {
+            "ls": {
+                "book": "1_Könige"
+                "chapter": 1
+                "version": "ls"
+                "parse_status": 0
+                "verse_count": 18 # should be static
+                # "level0_count": 14 # Not translated, better leave that out and calculate it.
+                "level1_count": 1 # in arbeit
+                "level2_count": 1 # rohfassung
+                "level3_count": 1 # fast fertig
+                "level4_count": 1 # fertig
+            }
+            "lf": {...}
+            "sf": {...}
+        }
+        "2": {...}
+        ...
+    }
+    "2_Könige": {...}
+    ...
+}
+/api/index => {
+    "ls": {
+        chapter_count: 1230
+        chapter_exists_count: 120
+        verse_exists_count: 12354
+        parse_failure_count: 12
+        parse_ok_count: 108
+        level1_chapter_count: 1
+        level2_chapter_count: 0
+        level3_chapter_count: 2
+        level4_chapter_count: 3
+        level1_verse_count: 123
+        level2_verse_count: 1
+        level3_verse_count: 2
+        level4_verse_count: 23
+    }
+    ...
+}
+/api/index/1_Könige => {
+    "ls": {
+        book: "1_Könige"
+        chapter_count: 12
+        chapter_exists_count: 5
+        verse_exists_count: 123
+        parse_failure_count: 2
+        parse_ok_count: 3
+        level1_chapter_count: 1
+        level2_chapter_count: 0
+        level3_chapter_count: 2
+        level4_chapter_count: 3
+        level1_verse_count: 123
+        level2_verse_count: 1
+        level3_verse_count: 2
+        level4_verse_count: 23
+    }
+    ...
+}
+/api/index/1_Könige/1 => {
+    "ls": {
+        book: "1_Könige"
+        chapter: 1
+        level: 2
+        verse_exists_count: 12
+        parse_status: 1
+        level1_verse_count: 1
+        level2_verse_count: 1
+        level3_verse_count: 2
+        level4_verse_count: 23
+    }
+}
+/api/bookselector => {
+    overview: {
+        ls: {
+            chapter_count: 1230
+            chapter_exists_count: 120
+            verse_exists_count: 12354
+            parse_failure_count: 12
+            parse_ok_count: 108
+            level1_verse_count: 123
+            level2_verse_count: 1
+            level3_verse_count: 2
+            level4_verse_count: 23
+        }
+        ...
+    }
+    books: {
+        1_Könige: {
+            name: "1_Könige"
+            chapter_count: 12
+            versions: {
+                ls: {
+                    chapter_exists_count: 5
+                    verse_exists_count: 123
+                    parse_failure_count: 2
+                    parse_ok_count: 3
+                    level1_chapter_count: 1
+                    level2_chapter_count: 0
+                    level3_chapter_count: 2
+                    level4_chapter_count: 3
+                    level1_verse_count: 123
+                    level2_verse_count: 1
+                    level3_verse_count: 2
+                    level4_verse_count: 23
+                }
+                ...
+            }
+        }
+        ...
+    }
+}
 =cut
 has index => (
     is => 'ro',
@@ -101,6 +215,84 @@ hook before_template_render => sub {
     my $tokens = shift;
     $tokens->{static_prefix} = config->{static_prefix} || request->uri_base();
 };
+
+ajax 'api/bookselector' => sub {
+    books: {
+        1_Könige: {
+            name: 1_Könige
+            chapter_count: 12
+            part: ot
+            id: 1Kgs
+            versions: {
+                ls: {
+                    chapter_exists_count: 5
+                    verse_exists_count: 123
+                    parse_failure_count: 2
+                    parse_ok_count: 3
+                    level1_chapter_count: 1
+                    level2_chapter_count: 0
+                    level3_chapter_count: 2
+                    level4_chapter_count: 3
+                    level1_verse_count: 123
+                    level2_verse_count: 1
+                    level3_verse_count: 2
+                    level4_verse_count: 23
+                }
+                ...
+            }
+        }
+        ...
+    }
+    my %data = ();
+
+
+
+SELECT page, revision, parse_errors
+FROM
+page_id
+INNER JOIN revision ON page_latest = rev_id
+INNER JOIN parse_errors ON rev_id = revid
+WHERE error_occurred = 1;
+
+
+    my $dbh = DBI->connect('dbi:'.$config->{dbi_url},$config->{dbi_user},$config->{dbi_pw})
+        or die "Connection Error: $DBI::errstr\n";
+    my $sql = 'insert into bibelwikiparse_errors values('.$dbh->quote($page_id).', '.$dbh->quote($rev_id).', '.$dbh->quote($status).', '.$dbh->quote($desc).');';
+    my $sth = $dbh->prepare($sql);
+
+
+    my $books = LoadFile($fileName);
+    $sth->execute
+        or die "SQL Error: $DBI::errstr\n";
+
+    for my $book (@$books) {
+        my $book = $1;
+        my $chapter = $2;
+        my $version = $3;
+        my $status = $4;
+        my $filename = File::Spec->catpath($volume, $directories, $5);
+
+        my $bookEntry = $self->getBook($book);
+        if(not defined $bookEntry) {
+            debug "Skipping $book, no valid book name.";
+            next;
+        }
+        if (defined $bookEntry->{$chapter}{$version}) {
+            debug "Skipping $version $book $chapter, found more than once.";
+            next;
+        }
+        if (not (-f -r -s $filename)) {
+            debug "Skipping $filename, check permissions and stuff.";
+            next;
+        }
+
+        $bookEntry->{chapters}{$chapter}{$version}{book} = $book;
+        $bookEntry->{chapters}{$chapter}{$version}{chapter} = $chapter;
+        $bookEntry->{chapters}{$chapter}{$version}{version} = $version;
+        $bookEntry->{chapters}{$chapter}{$version}{status} = $status;
+        $bookEntry->{chapters}{$chapter}{$version}{filename} = $filename;
+    }
+}
 
 get '/' => sub {
     template 'index';

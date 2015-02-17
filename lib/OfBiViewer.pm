@@ -217,81 +217,126 @@ hook before_template_render => sub {
 };
 
 ajax 'api/bookselector' => sub {
+=pod
+    overview: {
+        ls: {
+            chapter_count: 1230
+            chapter_exists_count: 120
+            parse_failure_count: 12
+            parse_ok_count: 108
+            level1_verse_count: 123
+            level2_verse_count: 1
+            level3_verse_count: 2
+            level4_verse_count: 23
+        }
+        ...
+    }
     books: {
         1_Könige: {
+            osis_id: 1Kgs
             name: 1_Könige
             chapter_count: 12
             part: ot
-            id: 1Kgs
-            versions: {
-                ls: {
-                    chapter_exists_count: 5
-                    verse_exists_count: 123
-                    parse_failure_count: 2
-                    parse_ok_count: 3
-                    level1_chapter_count: 1
-                    level2_chapter_count: 0
-                    level3_chapter_count: 2
-                    level4_chapter_count: 3
-                    level1_verse_count: 123
-                    level2_verse_count: 1
-                    level3_verse_count: 2
-                    level4_verse_count: 23
+            ls: {
+                chapter_exists_count: 6
+                verse_exists_count: 123
+                parse_failure_count: 2
+                parse_ok_count: 3
+                level1_chapter_count: 1
+                level2_chapter_count: 0
+                level3_chapter_count: 2
+                level4_chapter_count: 3
+                level1_verse_count: 123
+                level2_verse_count: 1
+                level3_verse_count: 2
+                level4_verse_count: 23
+
+            }
+            ...
+            chapters: {
+                1: {
+                    verses: 4,
+                    ls: {
+                        level1_verse_count: 123
+                        level2_verse_count: 1
+                        level3_verse_count: 2
+                        level4_verse_count: 23
+                    }
+                    verses: [
+                        {
+                            from_number: 1
+                            to_number: 1
+                            status: 2
+                            text: "Asdf"
+                        }
+                    ]
                 }
-                ...
             }
         }
         ...
     }
+=cut
     my %data = ();
-
-
-
-SELECT page, revision, parse_errors
-FROM
-page_id
-INNER JOIN revision ON page_latest = rev_id
-INNER JOIN parse_errors ON rev_id = revid
-WHERE error_occurred = 1;
-
+    my %found_chapters = ();
 
     my $dbh = DBI->connect('dbi:'.$config->{dbi_url},$config->{dbi_user},$config->{dbi_pw})
         or die "Connection Error: $DBI::errstr\n";
-    my $sql = 'insert into bibelwikiparse_errors values('.$dbh->quote($page_id).', '.$dbh->quote($rev_id).', '.$dbh->quote($status).', '.$dbh->quote($desc).');';
-    my $sth = $dbh->prepare($sql);
+    my $sql =<<END
+SELECT
+book.osis_name,
+book.name,
+book.chapters,
+book.part,
+verse.chapter,
+verse.version,
+verse.from_number,
+verse.to_number,
+verse.status,
+verse.text
+FROM
+bibelwikiofbi_book as book
+LEFT OUTER JOIN bibelwikiofbi_chapter as chapter on book.id = chapter.book_id
+LEFT OUTER JOIN bibelwikiofbi_verse as verse on chapter.id = verse.chapter_id
+INNER JOIN bibelwikirevision as revision on verse.rev_id = revision.rev_id
+INNER JOIN bibelwikipage as page on revision.rev_id = page.page_latest;
+END
+    my @result = @{ $dbh->selectall_arrayref($sql, { Slice => {} }) };
 
-
-    my $books = LoadFile($fileName);
-    $sth->execute
-        or die "SQL Error: $DBI::errstr\n";
-
-    for my $book (@$books) {
-        my $book = $1;
-        my $chapter = $2;
-        my $version = $3;
-        my $status = $4;
-        my $filename = File::Spec->catpath($volume, $directories, $5);
-
-        my $bookEntry = $self->getBook($book);
-        if(not defined $bookEntry) {
-            debug "Skipping $book, no valid book name.";
-            next;
+    for my $entry (@result) {
+        if(not $entry->{verse.chapter}) {
+            # No verses in this chapter yet.
+            $data{overview}->{chapter_count}++;
         }
-        if (defined $bookEntry->{$chapter}{$version}) {
-            debug "Skipping $version $book $chapter, found more than once.";
-            next;
-        }
-        if (not (-f -r -s $filename)) {
-            debug "Skipping $filename, check permissions and stuff.";
-            next;
-        }
+        else {
+            # There actually are verses in this chapter.
+            my $verse_count = $data{overview}->{"level".$entry->{verse.status}."_verses"} += $entry->{verse.to_number} - $entry->{verse.from_number} + 1;
+            $data{overview}->{"level".$entry->{verse.status}."_verses"} += $verse_count;
 
-        $bookEntry->{chapters}{$chapter}{$version}{book} = $book;
-        $bookEntry->{chapters}{$chapter}{$version}{chapter} = $chapter;
-        $bookEntry->{chapters}{$chapter}{$version}{version} = $version;
-        $bookEntry->{chapters}{$chapter}{$version}{status} = $status;
-        $bookEntry->{chapters}{$chapter}{$version}{filename} = $filename;
+            my %book = %{ $data{books}->{$entry->{book.osis_name}} };
+
+            if not $book{chapters}->{$entry->{verse.chapter}} {
+                $data{overview}->{chapter_count}++;
+                $data{overview}->{chapter_exists_count}++;
+            }
+
+            $book{osis_id} = $entry->{book.osis_name};
+            $book{name} = $entry->{book.name};
+            $book{chapter_count} = $entry->{book.chapters};
+            $book{part} = $entry->{book.part};;
+            $book{$entry->{verse.version}}->{"level".$entry->{verse.status}."_verses"} += $verse_count;
+            $book{$entry->{verse.version}}->{"level".$entry->{verse.status}."_chapters"}++ if not %book{chapters}->verse.chapter};
+            my %chapter = %{ $book{chapters}->{$entry->{verse.chapter}} };
+            $chapter{verse_count} = $entry->{chapter.verses};
+            $chapter{$entry->{verse.version}}->{"level".$entry->{verse.status}."_verses"} += $verse_count;
+            push $chapter{verses}, [
+                from_number => $entry->{verse.from_number},
+                to_number =>   $entry->{verse.to_number},
+                status =>      $entry->{verse.status},
+                text =>        $entry->{verse.text},
+            ];
+        }
     }
+    return \%data;
 }
 
 get '/' => sub {

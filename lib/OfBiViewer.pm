@@ -34,7 +34,8 @@ book.osis_name,
 book.name,
 book.chapters,
 book.part,
-verse.chapter,
+chapter.number,
+chapter.verses,
 verse.version,
 verse.from_number,
 verse.to_number,
@@ -50,7 +51,7 @@ END
     my @result = @{ $dbh->selectall_arrayref($sql, { Slice => {} }) };
 
     for my $entry (@result) {
-        if(not $entry->{"verse.chapter"}) {
+        if(not $entry->{"verse.version"}) {
             # No verses in this chapter yet.
             $data{overview}->{chapter_count}++;
         }
@@ -61,7 +62,7 @@ END
 
             my %book = %{ $data{books}->{$entry->{"book.osis_name"}} };
 
-            if (not $book{chapters}->{$entry->{"verse.chapter"}}) {
+            if (not $book{chapters}->{$entry->{"chapter.number"}}) {
                 $data{overview}->{chapter_count}++;
                 $data{overview}->{chapter_exists_count}++;
             }
@@ -71,8 +72,8 @@ END
             $book{chapter_count} = $entry->{"book.chapters"};
             $book{part} = $entry->{"book.part"};
             $book{$entry->{"verse.version"}}->{"level".$entry->{"verse.status"}."_verses"} += $verse_count;
-            $book{$entry->{"verse.version"}}->{"level".$entry->{"verse.status"}."_chapters"}++ if (not $book{chapters}->{$entry->{"verse.chapter"}});
-            my %chapter = %{ $book{chapters}->{$entry->{"verse.chapter"}} };
+            $book{$entry->{"verse.version"}}->{"level".$entry->{"verse.status"}."_chapters"}++ if (not $book{chapters}->{$entry->{"chapter.number"}});
+            my %chapter = %{ $book{chapters}->{$entry->{"chapter.number"}} };
             $chapter{verse_count} = $entry->{"chapter.verses"};
             $chapter{$entry->{"verse.version"}}->{"level".$entry->{"verse.status"}."_verses"} += $verse_count;
             push (@{ $chapter{verses} }, [
